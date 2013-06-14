@@ -3,6 +3,8 @@ var reboot_happening = false;
 
 function start_checkout()
 {
+    alert('not quite ready to try that yet!');
+    return
     if (reboot_happening)
     {
         alert('be patient!');
