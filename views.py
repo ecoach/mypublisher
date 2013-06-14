@@ -5,11 +5,12 @@ from django.shortcuts import render_to_response, render
 from django.conf import settings
 from djangotailoring.views import TailoredDocView
 from djangotailoring.project import getsubjectloader
-from mynav.nav import main_nav
+from mynav.nav import main_nav, tasks_nav
+from .steps import steps_nav
 
 # Create your views here.
 
-def checkout_view(request):
+def trigger_checkout_view(request):
     if not request.user.is_staff:
         return HttpResponseRedirect(reverse('mycoach:default')) 
     return HttpResponse("You're looking at the test page for staff")
@@ -20,9 +21,24 @@ def checkout_view(request):
         read_data = f.write('reboot')
     return HttpResponse(time.localtime().tm_sec)
 
+def review_view(request):
+    return render(request, 'mypublisher/review.html', {
+        "main_nav": main_nav(request.user, 'staff_view'),
+        "tasks_nav": tasks_nav(request.user, 'publish'),
+        "steps_nav": steps_nav(request.user, 'review')
+    })
+
+def checkout_view(request):
+    return render(request, 'mypublisher/checkout.html', {
+        "main_nav": main_nav(request.user, 'staff_view'),
+        "tasks_nav": tasks_nav(request.user, 'publish'),
+        "steps_nav": steps_nav(request.user, 'checkout')
+    })
+
 def checkback_view(request):
     return HttpResponse('reboot done')
 
+"""
 class Message_Viewer_View(TailoredDocView):
     #template_name='mycoach/admin.html'
     template_name='mycoach/message_viewer.html'
@@ -136,4 +152,4 @@ class Copy_Student_View(TemplateView):
         context["copy_student"] = self.m_copy
         return context
 
-
+"""

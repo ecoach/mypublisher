@@ -1,0 +1,25 @@
+{% extends 'staff_page.html' %}
+
+{% block title %}Publisher - {% endblock %}
+
+{% block header_files %}
+{% endblock %}
+
+{% block head_extra %}
+{% endblock %}
+
+{% block steps_navigation %}
+    <div class="span3" id="nav-static nav-static-wide">
+        <ul class="step-staff">
+        {% for nn in steps_nav %}
+            <li>
+                <a href="{{nn.2}}" class="{{nn.1}}">{{nn.0}}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
