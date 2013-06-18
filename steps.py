@@ -8,14 +8,14 @@ def steps_nav(user, selected):
             #       'links_to'
             #           'permission_required'
             #               'selected'
-            ['Step 1: Review Message', 
+            ['1. Review Message', 
                 '',  
                     reverse('mypublisher:review'),
                         'staff',
                             'review',
 
             ],
-            ['Step 2: Publish Message', 
+            ['2. Publish Message', 
                 '',  
                     reverse('mypublisher:checkout'),
                         'staff',
