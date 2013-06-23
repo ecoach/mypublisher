@@ -17,7 +17,7 @@ def steps_nav(user, selected):
             ],
             ['2. Publish Message', 
                 '',  
-                    reverse('mypublisher:checkout'),
+                    reverse('mypublisher:publish'),
                         'staff',
                             'publish',
 

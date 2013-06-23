@@ -12,8 +12,8 @@ urlpatterns = patterns('',
 
     # publisher urls
     url(r'^review/', login_required(review_view), name='review'),
+    url(r'^publish/', login_required(publish_view), name='publish'),
     url(r'^checkout/', login_required(checkout_view), name='checkout'),
-    url(r'^trigger_checkout/', login_required(trigger_checkout_view), name='trigger_checkout'),
     url(r'^checkback/', login_required(checkback_view), name='checkback'),
     url(r'^', login_required(review_view), name='default'),
 

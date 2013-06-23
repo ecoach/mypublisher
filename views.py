@@ -10,7 +10,7 @@ from .steps import steps_nav
 
 # Create your views here.
 
-def trigger_checkout_view(request):
+def checkout_view(request):
     if not request.user.is_staff:
         return HttpResponseRedirect(reverse('mycoach:default')) 
     return HttpResponse("You're looking at the test page for staff")
@@ -28,8 +28,8 @@ def review_view(request):
         "steps_nav": steps_nav(request.user, 'review')
     })
 
-def checkout_view(request):
-    return render(request, 'mypublisher/checkout.html', {
+def publish_view(request):
+    return render(request, 'mypublisher/publish.html', {
         "main_nav": main_nav(request.user, 'staff_view'),
         "tasks_nav": tasks_nav(request.user, 'publish'),
         "steps_nav": steps_nav(request.user, 'checkout')
