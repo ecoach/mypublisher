@@ -8,19 +8,6 @@
 {% block head_extra %}
 {% endblock %}
 
-{% block steps_navigation %}
-    <div class="nav-static-steps">
-        <div class="btn-group btn-group-steps">
-       	{% autoescape off %}
-        {% for nn in steps_nav %}
-            <a href="{{nn.2}}" class="btn {{nn.1}}">{{nn.0}}</a>
-          
-        {% endfor %}
-        {% endautoescape %}
-        </div>
-    </div>
-{% endblock %}
-
 {% block content %}
 {% endblock %}
 
