@@ -13,11 +13,11 @@ from .steps import steps_nav
 def checkout_view(request):
     if not request.user.is_staff:
         return HttpResponseRedirect(reverse('mycoach:default')) 
-    return HttpResponse("You're looking at the test page for staff")
-    import pwd, os, pexpect, subprocess, time
-    cmd_str = "source " + settings.DIR_COACH + "checkout.sh"
+
+    import os, time
+    cmd_str = "source " + settings.DIR_PROJ + "authors_checkout.sh"
     os.system(cmd_str) 
-    with open(settings.DIR_COACH + 'reboot_flag.txt', 'w') as f:
+    with open(settings.DIR_PROJ + 'reboot_flag.txt', 'w') as f:
         read_data = f.write('reboot')
     return HttpResponse(time.localtime().tm_sec)
 

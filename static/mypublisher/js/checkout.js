@@ -3,8 +3,6 @@ var reboot_happening = false;
 
 function start_checkout()
 {
-    alert('not quite ready to try that yet!');
-    return
     if (reboot_happening)
     {
         alert('be patient!');
@@ -21,7 +19,7 @@ function run_checkout()
     var rand = Math.random(10000000);
     $.ajax({
         type: "GET",
-        url: "/mts5/checkout/",
+        url: "/mts4/publisher/checkout/",
         data: "rand=" + rand,
         success: function(resp) {
             reported_time = (60 - resp);
@@ -45,7 +43,7 @@ function run_checkback()
     var rand = Math.random(10000000);
     $.ajax({
         type: "GET",
-        url: "/mts5/checkback/",
+        url: "/mts4/publisher/checkback/",
         data: "rand=" + rand,
         success: function(resp) {
             alert('server is back up');
