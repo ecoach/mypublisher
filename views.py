@@ -32,7 +32,7 @@ def publish_view(request):
     return render(request, 'mypublisher/publish.html', {
         "main_nav": main_nav(request.user, 'staff_view'),
         "tasks_nav": tasks_nav(request.user, 'publish'),
-        "steps_nav": steps_nav(request.user, 'checkout')
+        "steps_nav": steps_nav(request.user, 'publish')
     })
 
 def checkback_view(request):
