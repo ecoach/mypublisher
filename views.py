@@ -24,14 +24,14 @@ def checkout_view(request):
 def review_view(request):
     return render(request, 'mypublisher/review.html', {
         "main_nav": main_nav(request.user, 'staff_view'),
-        "tasks_nav": tasks_nav(request.user, 'publish'),
+        "tasks_nav": tasks_nav(request.user, 'publisher'),
         "steps_nav": steps_nav(request.user, 'review')
     })
 
 def publish_view(request):
     return render(request, 'mypublisher/publish.html', {
         "main_nav": main_nav(request.user, 'staff_view'),
-        "tasks_nav": tasks_nav(request.user, 'publish'),
+        "tasks_nav": tasks_nav(request.user, 'publisher'),
         "steps_nav": steps_nav(request.user, 'publish')
     })
 
