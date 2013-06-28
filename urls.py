@@ -16,6 +16,5 @@ urlpatterns = patterns('',
     url(r'^checkout/', login_required(checkout_view), name='checkout'),
     url(r'^checkback/', login_required(checkback_view), name='checkback'),
     url(r'^', login_required(review_view), name='default'),
-
 )
 
