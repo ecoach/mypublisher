@@ -15,7 +15,7 @@ def checkout_view(request):
         return HttpResponseRedirect(reverse('mycoach:default')) 
 
     import os, time
-    cmd_str = "source " + settings.DIR_PROJ + "authors_checkout.sh"
+    cmd_str = "source " + settings.DIR_MYDATA + "authors_checkout.sh"
     os.system(cmd_str) 
     with open(settings.DIR_PROJ + 'reboot_flag.txt', 'w') as f:
         read_data = f.write('reboot')
