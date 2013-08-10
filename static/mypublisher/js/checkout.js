@@ -19,7 +19,7 @@ function run_checkout()
     var rand = Math.random(10000000);
     jQuery.ajax({
         type: "GET",
-        url: "/mts4/publisher/checkout/",
+        url: "/coach4/publisher/checkout/",
         data: "rand=" + rand,
         success: function(resp) {
             reported_time = (60 - resp);
@@ -43,7 +43,7 @@ function run_checkback()
     var rand = Math.random(10000000);
     jQuery.ajax({
         type: "GET",
-        url: "/mts4/publisher/checkback/",
+        url: "/coach4/publisher/checkback/",
         data: "rand=" + rand,
         success: function(resp) {
             alert('server is back up');
