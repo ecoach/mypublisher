@@ -11,7 +11,6 @@ from .steps import steps_nav
 # Create your views here.
 
 def checkout_view(request):
-    import pdb; pdb.set_trace() 
     if not request.user.is_staff:
         return HttpResponseRedirect(reverse('mycoach:default')) 
 
