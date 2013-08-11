@@ -16,6 +16,8 @@ function start_checkout()
 
 function run_checkout()
 {
+    alert("/"+CONF.coach+"/publisher/checkout/")
+    return 
     var rand = Math.random(10000000);
     jQuery.ajax({
         type: "GET",
