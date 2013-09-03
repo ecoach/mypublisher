@@ -3,6 +3,9 @@ var reboot_happening = false;
 
 function start_checkout()
 {
+    if(CONF.production()) 
+        if(!confirm('Are you sure you want to run checkout on the production server?'))
+            return;
     if (reboot_happening)
     {
         alert('be patient!');
