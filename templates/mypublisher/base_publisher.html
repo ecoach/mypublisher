@@ -6,5 +6,33 @@
 {% endblock %}
 
 {% block content %}
+    {% if form != None %}  
+        <form action="" id="publisher_form" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <center><input type="submit" value="Submit" /></center>
+    {% endif %} 
+
+        {% block status_report %}
+
+        {% endblock %}
+        <hr>
+        <div class="row-fluid">
+            <div class="span4">
+                {% block left_side %}
+
+                {% endblock %}
+            </div>
+            <div class="span1">
+            </div>
+            <div class="span7">
+                {% block right_side %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+    {% if form != None %}  
+        </form>
+    {% endif %} 
+
 {% endblock %}
 

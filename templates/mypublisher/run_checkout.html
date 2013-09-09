@@ -1,0 +1,22 @@
+{% extends 'mypublisher/base_publisher.html' %}
+
+{% block head_extra %}
+    <script type"text/JavaScript" src="{{ STATIC_URL }}mypublisher/js/checkout.js?{% now "U" %}"></script> 
+{% endblock %}
+
+{% block content %}
+	
+	<div class="span9">
+	    <br>
+	    Soon you will be able to review your messages here as part of a message publishing task.
+	    <br>
+	    The first step in the task will be to run a checkout process on the server.
+	    <br>
+	    <br>
+	    <div class="input-prepend">
+		    <input type="button" value='Run Checkout' onclick="start_checkout();" class="btn"/> 
+		    <input type="text" name='countdown' id='countdown' style="width: 300px;" value='--' disabled='true' /> 
+		</div>
+	</div>
+{% endblock %}
+

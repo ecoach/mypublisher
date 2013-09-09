@@ -8,18 +8,18 @@ def steps_nav(user, selected):
             #       'links_to'
             #           'permission_required'
             #               'selected'
-            ['1. Review Message', 
+            ['1. Run Checkout', 
                 '',  
-                    reverse('mypublisher:review'),
+                    reverse('mypublisher:run_checkout'),
                         'staff',
-                            'review',
+                            'run_checkout',
 
             ],
-            ['2. Publish Message', 
+            ['2. Copy Student', 
                 '',  
-                    reverse('mypublisher:publish'),
+                    reverse('mypublisher:copycat'),
                         'staff',
-                            'publish',
+                            'copycat',
 
             ]
         ]

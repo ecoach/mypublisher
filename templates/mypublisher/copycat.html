@@ -1,0 +1,80 @@
+{% extends 'mypublisher/base_publisher.html' %}
+
+{% block head_extra %}
+    <script type="text/javascript">
+        function copy_student(sid)
+        {
+            var elog = {}
+            elog.eventCategory = 'staff'
+            elog.eventAction = 'copycat';
+            elog.eventLabel = sid;
+            logger.logEvent(false, elog);
+            var f = jQuery('#publisher_form');
+            jQuery('#id_copy_who').val(sid);
+            f.submit();
+        }
+    </script>
+
+{% endblock %}
+
+    {% block status_report %}
+        Just Copied: {{copied}}
+        <br>
+        Table Selected: {{active_table}}
+        <br>
+        Num Columns Selected: {{active_columns|length}}
+    {% endblock %}
+
+    {% block left_side %}
+        <script type="text/javascript">
+            function toggle_check(checked)
+            {
+                jQuery("[id^='id_columns']").prop('checked', checked);
+            }
+        </script>
+        <table>
+            <tr>
+                <td>
+                    Database Table:
+                </td>
+                <td>
+                    {{ form.db_table }}
+                </td>
+            </tr>
+            <tr>
+                <td valign='top'>
+                    Columns:&nbsp;&nbsp;&nbsp;<br>
+                </td>
+                <td>
+                    <nobr>
+                        <input type="checkbox" onclick="toggle_check(this.checked);" /> 
+                        toggle checkall
+                    </nobr>
+                    <hr>
+                    {{ form.copy_who }}
+                    {{ form.columns }}
+                <td>
+            </tr>
+        </table>
+    {% endblock %}
+
+    {% block right_side %}
+        <div class="span8">
+            <table class="table table-striped table-bordered table-condensed table-hover">
+                <tr>
+                    {% for hh in headers %}
+                        <th>{{hh}}</th>
+                    {% endfor %}
+                </tr>
+                {% for ss in students %}
+                    <tr onclick="copy_student('{{ss.0}}');">
+                    {% for dd in ss %}
+                        <td>{{dd}}</td>
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endblock %}
+
+
