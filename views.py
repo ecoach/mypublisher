@@ -42,7 +42,7 @@ def copycat_view(request):
     from django.db import connections, router
 
     copycat = copycat_object(request.user)
-    copied = 'none'
+    copy_error = 'none'
     if request.method == 'POST':
         form = Copycat_Form(
             column_choices = copycat.column_choices(),
@@ -61,22 +61,28 @@ def copycat_view(request):
                     Copycat_Column(copycat=copycat, column_name=cc).save()
             if form.cleaned_data["copy_who"] != 'no-one':
                 # attempt to copy the student data
+                copied = str(request.POST.get("copy_who"))
                 try:
-                    copied = str(request.POST.get("copy_who"))
                     # Common
                     me = Common1.objects.filter(user_id=request.user.username)[0]
                     you = Common1.objects.filter(user_id=copied)[0]
                     you.pk = me.pk
                     you.user_id = me.user_id
                     you.save()
+                    copy_error = "Common sucess, "
+                except:
+                    copy_error = "<font color='red'>Common error</font>, "
+                try:
                     # Source1
                     me = Source1.objects.filter(user_id=request.user.username)[0]
                     you = Source1.objects.filter(user_id=copied)[0]
                     you.pk = me.pk
                     you.user_id = me.user_id
                     you.save()
+                    copy_error = copy_error + "Source1 sucess, "
                 except:
-                    copied = "error: unable to copy completely: " + request.POST.get("copy_who")
+                    copy_error = copy_error + "<font color='red'>Source1 error</font>, "
+                copy_error = copy_error + "user: " + request.POST.get("copy_who")
             copycat.save()
     form = Copycat_Form(
         column_choices = copycat.column_choices(),
@@ -88,11 +94,11 @@ def copycat_view(request):
     )
     # make the table 
     headers = ['user_id'] + [str(ii.column_name) for ii in copycat.copycat_column_set.all()] 
-    students = eval(copycat.table).objects.all().order_by('id').values_list('user_id')
+    students = copycat.get_table().objects.all().order_by('id').values_list('user_id')
     col_str = ', '.join([str(x) for x in headers]) 
     where_str = "user_id='" + "' or user_id='".join([str(x[0]) for x in students]) + "'"
-    query = "select " + col_str + " from " + eval(copycat.table)._meta.db_table
-    db = router.db_for_read(eval(copycat.table))
+    query = "select " + col_str + " from " + copycat.get_table()._meta.db_table
+    db = router.db_for_read(copycat.get_table())
     cursor = connections[db].cursor()
     res = cursor.execute(query)
     student_data = cursor.fetchall() 
@@ -102,7 +108,7 @@ def copycat_view(request):
         "tasks_nav": tasks_nav(request.user, 'publisher'),
         "steps_nav": steps_nav(request.user, 'copycat'),
         "headers": headers,
-        "copied": copied,
+        "copy_error": copy_error,
         "students": student_data,
         "active_columns": [str(ii.column_name) for ii in copycat.copycat_column_set.all()],
         "active_table": copycat.table,
