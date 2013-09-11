@@ -77,6 +77,7 @@ def copycat_view(request):
                     me = Source1.objects.filter(user_id=request.user.username)[0]
                     you = Source1.objects.filter(user_id=copied)[0]
                     you.pk = me.pk
+                    you.Reg_Enrolled = me.Reg_Enrolled
                     you.user_id = me.user_id
                     you.save()
                     copy_error = copy_error + "Source1 sucess, "
