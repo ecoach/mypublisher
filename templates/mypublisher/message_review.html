@@ -1,0 +1,41 @@
+{% extends 'mypublisher/base_publisher.html' %}
+
+{% block head_extra %}
+    {% include "mycoach/base_message_head.html" %}
+    <!--auto resize iframe height -->
+    <script src="{{STATIC_URL}}/mycoach/js/jquery-iframe-auto-height.plugin.1.9.3.min.js?{% now "U" %}" type="text/javascript"></script>
+    <script src="{{STATIC_URL}}/mycoach/js/jquery.browser.js?{% now "U" %}" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {    
+            $('iframe.preview').each(function() {
+                if ($(this).parents(".tab-content").length == 0) {
+                    $(this).iframeAutoHeight(ecoach.messages.IFRAME_AUTO_HEIGHT_CONFIG);
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block status_report %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row-fluid">
+        <div class="span3">
+            <ul class="nav nav-list collapse side-list-items">
+                {% for nn in all_messages %}
+                    <li>
+                    <a href="{{nn.2}}" class="message {{nn.1}}">{{nn.0|safe}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="span9">
+            <iframe width='100%' src="{% url 'mycoach:message_frame_view' msg_id=selected_msg %}" scrolling='no' frameborder='0' class='preview'></iframe>
+        </div>
+    </div>
+
+{% endblock %}
+
+

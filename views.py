@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response, render
 from django.conf import settings
 from djangotailoring.views import TailoredDocView
 from djangotailoring.project import getsubjectloader
+from mycoach.nav import all_messages_nav
 from mynav.nav import main_nav, tasks_nav
 from .steps import steps_nav
 from .models import *
@@ -28,7 +29,7 @@ def checkout_view(request):
         read_data = f.write('reboot')
     return HttpResponse(time.localtime().tm_sec)
 
-def review_view(request):
+def run_checkout_view(request):
     return render(request, 'mypublisher/run_checkout.html', {
         "main_nav": main_nav(request.user, 'staff_view'),
         "tasks_nav": tasks_nav(request.user, 'publisher'),
@@ -114,6 +115,17 @@ def copycat_view(request):
         "active_columns": [str(ii.column_name) for ii in copycat.copycat_column_set.all()],
         "active_table": copycat.table,
         "form": form,
+    })
+
+def message_review_view(request, *args, **kwargs):
+    from django.db import connections, router
+
+    return render(request, 'mypublisher/message_review.html', {
+        "main_nav": main_nav(request.user, 'staff_view'),
+        "tasks_nav": tasks_nav(request.user, 'publisher'),
+        "steps_nav": steps_nav(request.user, 'message_review'),
+        "all_messages": all_messages_nav(request.user, kwargs['msg_id'] ),
+        "selected_msg": kwargs['msg_id'],
     })
 
 class Message_Viewer_View(TailoredDocView):
