@@ -96,10 +96,10 @@ def copycat_view(request):
     )
     # make the table 
     headers = ['user_id'] + [str(ii.column_name) for ii in copycat.copycat_column_set.all()] 
-    students = copycat.get_table().objects.all().order_by('id').values_list('user_id')
+    students = Source1.objects.all().order_by('id').values_list('user_id')
     col_str = ', '.join([str(x) for x in headers]) 
-    where_str = "user_id='" + "' or user_id='".join([str(x[0]) for x in students]) + "'"
-    query = "select " + col_str + " from " + copycat.get_table()._meta.db_table
+    where_str = " where user_id='" + "' or user_id='".join([str(x[0]) for x in students]) + "'"
+    query = "select " + col_str + " from " + copycat.get_table()._meta.db_table + where_str
     db = router.db_for_read(copycat.get_table())
     cursor = connections[db].cursor()
     res = cursor.execute(query)
@@ -118,7 +118,6 @@ def copycat_view(request):
     })
 
 def message_review_view(request, *args, **kwargs):
-    from django.db import connections, router
 
     return render(request, 'mypublisher/message_review.html', {
         "main_nav": main_nav(request.user, 'staff_view'),
