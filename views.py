@@ -133,7 +133,6 @@ def message_review_view(request, *args, **kwargs):
         "selected_msg": kwargs['msg_id'],
     })
 
-@staff_member_required
 def copycat_object(user):
     profile = user.get_profile()
     prefs = profile.prefs
