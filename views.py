@@ -1,3 +1,4 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
@@ -39,6 +40,7 @@ def run_checkout_view(request):
 def checkback_view(request):
     return HttpResponse('reboot done')
 
+@staff_member_required
 def copycat_view(request):
     from django.db import connections, router
 
