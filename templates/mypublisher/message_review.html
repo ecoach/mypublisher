@@ -1,10 +1,10 @@
 {% extends 'mypublisher/base_publisher.html' %}
 
 {% block head_extra %}
-    {% include "mycoach/base_message_head.html" %}
+    {% include "mytailoring/base_message_head.html" %}
     <!--auto resize iframe height -->
-    <script src="{{STATIC_URL}}/mycoach/js/jquery-iframe-auto-height.plugin.1.9.3.min.js?{% now "U" %}" type="text/javascript"></script>
-    <script src="{{STATIC_URL}}/mycoach/js/jquery.browser.js?{% now "U" %}" type="text/javascript"></script>
+    <script src="{{STATIC_URL}}/mytailoring/js/jquery-iframe-auto-height.plugin.1.9.3.min.js?{% now "U" %}" type="text/javascript"></script>
+    <script src="{{STATIC_URL}}/mytailoring/js/jquery.browser.js?{% now "U" %}" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function($) {    
             $('iframe.preview').each(function() {
@@ -32,7 +32,7 @@
             </ul>
         </div>
         <div class="span9">
-            <iframe width='100%' src="{% url 'mycoach:message_frame_view' msg_id=selected_msg %}" scrolling='no' frameborder='0' class='preview'></iframe>
+            <iframe width='100%' src="{% url 'mytailoring:message_frame_view' msg_id=selected_msg %}" scrolling='no' frameborder='0' class='preview'></iframe>
         </div>
     </div>
 

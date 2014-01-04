@@ -6,7 +6,7 @@ from django.shortcuts import render_to_response, render
 from django.conf import settings
 from djangotailoring.views import TailoredDocView
 from djangotailoring.project import getsubjectloader
-from mycoach.nav import all_messages_nav
+from mytailoring.nav import all_messages_nav
 from mynav.nav import main_nav, tasks_nav
 from .steps import steps_nav
 from .models import *
@@ -22,7 +22,7 @@ Common1 = mydata.models.Common1
 @staff_member_required
 def checkout_view(request):
     if not request.user.is_staff:
-        return HttpResponseRedirect(reverse('mycoach:default')) 
+        return HttpResponseRedirect(reverse('mytailoring:default')) 
 
     import os, time
     cmd_str = "source " + settings.DIR_MYDATA + "authors_checkout.sh"
