@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 
     # publisher urls
     url(r'^run_checkout/', login_required(run_checkout_view), name='run_checkout'),
+    url(r'^newcheckout/', login_required(newcheckout_view), name='newcheckout'),
     url(r'^checkout/', login_required(checkout_view), name='checkout'),
     url(r'^checkback/', login_required(checkback_view), name='checkback'),
     url(r'^copycat/', login_required(copycat_view), name='copycat'),

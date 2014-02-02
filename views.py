@@ -20,6 +20,15 @@ Common1 = mydata.models.Common1
 # Create your views here.
 
 @staff_member_required
+def newcheckout_view(request):
+    if not request.user.is_staff:
+        return HttpResponseRedirect(reverse('mytailoring:default')) 
+    import os
+    cmd_str = "source " + settings.DIR_MYDATA + "newauthors_checkout.sh"
+    os.system(cmd_str) 
+    os.system('touch ~jtritz/bitbucket/ecoach_webapps/mydata18/apache/django.wsgi')
+    return HttpResponse('piece of cake...3!')
+
 def checkout_view(request):
     if not request.user.is_staff:
         return HttpResponseRedirect(reverse('mytailoring:default')) 

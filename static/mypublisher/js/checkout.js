@@ -1,6 +1,27 @@
 var count_down = 60;
 var reboot_happening = false;
 
+function new_checkout()
+{
+    //{% url 'mypublisher:newcheckout' %}
+    jQuery('#countdown').val('running quick checkout...');
+    var rand = Math.random(10000000);
+    jQuery.ajax({
+        type: "GET",
+        url: CONF.newcheckout_url,
+        data: "rand=" + rand,
+        success: function(resp) {
+            alert('server is back up');
+            jQuery('#countdown').val('--');
+            reboot_happening = false;
+        },
+        error: function (xhr, ajaxOptions, thrownError){
+            alert('error, try again?');
+        }
+    }).done(function( msg ) {
+    });    
+}
+
 function start_checkout()
 {
     if(CONF.production()) 
