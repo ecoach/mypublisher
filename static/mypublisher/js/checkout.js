@@ -10,7 +10,7 @@ function new_checkout()
     var rand = Math.random(10000000);
     jQuery.ajax({
         type: "GET",
-        url: CONF.newcheckout_url,
+        url: '/'+CONF.COACH_URL+'/publisher/newcheckout/',
         data: "rand=" + rand,
         success: function(resp) {
             alert('server is back up');
