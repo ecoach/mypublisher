@@ -3,7 +3,9 @@ var reboot_happening = false;
 
 function new_checkout()
 {
-    //{% url 'mypublisher:newcheckout' %}
+    if(CONF.production()) 
+        if(!confirm('Are you sure you want to run checkout on the production server?'))
+            return;
     jQuery('#countdown').val('running quick checkout...');
     var rand = Math.random(10000000);
     jQuery.ajax({
