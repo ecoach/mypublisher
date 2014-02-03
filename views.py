@@ -26,7 +26,7 @@ def newcheckout_view(request):
     import os
     cmd_str = "source " + settings.DIR_MYDATA + "newauthors_checkout.sh"
     os.system(cmd_str) 
-    os.system('touch ~jtritz/bitbucket/ecoach_webapps/mydata18/apache/django.wsgi')
+    os.system("touch " + settings.DIR_MYDATA + "apache/django.wsgi")
     return HttpResponse('piece of cake...3!')
 
 def checkout_view(request):
